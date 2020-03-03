@@ -1,2 +1,2 @@
-# fishBall
-a game of fish and number sum
+# hello-world
+Hello world new project template.
