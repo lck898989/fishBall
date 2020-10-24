@@ -1,0 +1,32 @@
+{
+  "name": "map",
+  "version": "0.0.1",
+  "description": "The package template for getting started.",
+  "author": "Cocos Creator",
+  "main": "main.js",
+  "main-menu": {
+    "map/open": {
+      "message": "map:open"
+    },
+    "map/hello": {
+      "message": "map:say-hello"
+    },
+    "map/realmap": {
+      "message": "map:realmap"
+    }
+  },
+  "panel": {
+    "main": "panel/index/index.js",
+    "type": "dockable",
+    "title": "map",
+    "width": 400,
+    "height": 300
+  },
+  "panel.realmap": {
+    "main": "panel/map/index.js",
+    "type": "dockable",
+    "title": "realmap",
+    "width": 800,
+    "height": 600
+  }
+}

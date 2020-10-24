@@ -18,6 +18,7 @@ export default class Fish extends cc.Component {
     private canMove: boolean = true;
 
     private curSpeed: cc.Vec2 = new cc.Vec2(0,0);
+
     start () {
         // 生成随机的方向 变换scaleX,rotation
         this.direction = Util.createRandom(0,360);
@@ -26,6 +27,7 @@ export default class Fish extends cc.Component {
             this.node.scaleY = -0.5;
         }
     }
+
     private move(dt: number): void {
         let speedX = this.moveSpeed * Math.cos(this.direction * Math.PI / 180);
         let speedY = this.moveSpeed * Math.sin(this.direction * Math.PI / 180);
@@ -34,6 +36,7 @@ export default class Fish extends cc.Component {
         this.node.x += dt * speedX;
         this.node.y += dt * speedY;
     }
+
     private async change(border: string) {
         this.canMove = false;
         let self = this;
@@ -104,6 +107,7 @@ export default class Fish extends cc.Component {
         })
         this.canMove = true;
     }
+    
     update (dt: number) {
         if(this.node.scaleX === 0.5) {
             this.isFoward = true;

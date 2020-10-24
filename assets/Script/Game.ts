@@ -59,9 +59,13 @@ export default class Game extends cc.Component {
     // 存放node节点的对象
     private nodeMap: cc.Node[] = [];
 
+    private time: number = 0;
+    private timeInterval: number = 0.2;
+
     onLoad() {
         // 最开始开启物理系统
         cc.director.getPhysicsManager().enabled = true;
+        cc.director.getPhysicsManager().debugDrawFlags = 1;
     }
     async start () {
         let data: cc.JsonAsset = await this.loadConfig();
@@ -85,6 +89,8 @@ export default class Game extends cc.Component {
                         clearInterval(id);
                     },200);
                 });
+                // ballItem.getComponent(cc.PhysicsCircleCollider)
+                
             }
         }
         // 球下落完毕后开始游戏
@@ -108,6 +114,16 @@ export default class Game extends cc.Component {
         ballItem.setPosition(cc.v2(x,y));
         parent.addChild(ballItem);
         this.nodeMap.push(ballItem);
+
+        let rg: cc.RigidBody = ballItem.getComponent(cc.RigidBody);
+        let cl: cc.PhysicsCircleCollider = ballItem.getComponent(cc.PhysicsCircleCollider);
+        cl.radius = ballItem.width / 2;
+        console.log("小球的碰撞组件的半径是：",cl.radius," and 小球的宽度是 ：",ballItem.width);
+
+        rg.linearVelocity = cc.v2(0,0);
+        rg.angularVelocity = 0;
+        rg.awake = true;
+        rg.fixedRotation = true;
     }
     // 设置游戏状态
     set curState(state: GameState) {
@@ -308,10 +324,20 @@ export default class Game extends cc.Component {
             })
         })
     }
-    update() {
+    update(dt) {
         if(this.ballCon.childrenCount === 0 && this._curState !== GameState.INIT) {
             // 游戏结束
             this.curState = GameState.END;
+        }
+        if(this.curState === GameState.BEGIN) {
+            this.time += dt;
+            // if(this.time < this.timeInterval) {
+            //     cc.director.getPhysicsManager().enabled = false;
+            // } else {
+            //     cc.director.getPhysicsManager().enabled = true;
+            // }
+            this.time = 0;
+            // cc.director.getPhysicsManager().enabled = false;
         }
     }
     onDestroy(): void {

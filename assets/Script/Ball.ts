@@ -29,7 +29,6 @@ export default class Ball extends cc.Component {
     setNumberString(num: number): void {
         this.numLabel.string = num.toString();
     }
-
     update (dt) {
 
     }

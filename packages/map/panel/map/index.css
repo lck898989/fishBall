@@ -1,0 +1,13 @@
+.title {
+    text-align: center;
+}
+#gen {
+    margin-top: 50px;
+}
+.rowcol-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-items: flex-start;
+    align-items: center;
+}
